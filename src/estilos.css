@@ -1,0 +1,692 @@
+/* ==========================================================================
+   EcoPontos — sistema visual
+   A paleta de materiais vem da Resolução CONAMA 275/2001 e vive em
+   src/lib/materiais.js. Aqui ficam só as cores neutras da interface.
+   ========================================================================== */
+
+:root {
+  --ink: #14171a;
+  --ink-suave: #22282b;
+  --concreto: #e7e9e5;
+  --superficie: #ffffff;
+  --linha: #cdd1cc;
+  --tinta: #14171a;
+  --tinta-fraca: #5c6360;
+  --destaque: #14171a;
+
+  --display: 'Archivo', 'Helvetica Neue', system-ui, sans-serif;
+  --corpo: 'Public Sans', system-ui, -apple-system, sans-serif;
+  --mono: 'DM Mono', ui-monospace, 'SF Mono', monospace;
+
+  --largura: 1180px;
+  --margem: clamp(1.25rem, 4vw, 3.5rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--concreto);
+  color: var(--tinta);
+  font-family: var(--corpo);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2 {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--destaque);
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------- cabeçalho */
+
+.cabecalho {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.125rem var(--margem);
+  background: var(--ink);
+  color: #fff;
+}
+
+.cabecalho__marca {
+  font-family: var(--display);
+  font-variation-settings: 'wdth' 118;
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+}
+
+.cabecalho__marca span {
+  color: #8f9a92;
+}
+
+.cabecalho__contexto {
+  margin: 0;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.cabecalho__contagem {
+  padding-left: 1rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* ----------------------------------------------------------------- abertura */
+
+.abertura {
+  padding: clamp(2.5rem, 6vw, 4.5rem) var(--margem) clamp(2rem, 4vw, 3rem);
+  background: var(--ink);
+  color: #fff;
+}
+
+.abertura__olho {
+  margin: 0 0 1rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.abertura__titulo {
+  max-width: 14ch;
+  margin: 0 0 clamp(2rem, 4vw, 3rem);
+  font-family: var(--display);
+  font-variation-settings: 'wdth' 125;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 7.5vw, 5.25rem);
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+}
+
+/* ----------------------------------------------------------------- lixeiras */
+
+.lixeiras {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 3px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lixeira {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  width: 100%;
+  min-height: 164px;
+  padding: 1rem 0.9rem;
+  border: 0;
+  background: var(--cor);
+  color: var(--tinta);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.lixeira__codigo {
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.lixeira__nome {
+  font-family: var(--display);
+  font-variation-settings: 'wdth' 112;
+  font-weight: 800;
+  font-size: clamp(0.95rem, 1.5vw, 1.3rem);
+  line-height: 0.98;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+.lixeira__contagem {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  opacity: 0.8;
+}
+
+.lixeira:hover {
+  transform: translateY(-5px);
+}
+
+.lixeira--ativa {
+  transform: translateY(-10px);
+  box-shadow: inset 0 0 0 3px rgba(255, 255, 255, 0.85);
+}
+
+.lixeiras:has(.lixeira--ativa) .lixeira:not(.lixeira--ativa) {
+  filter: saturate(0.2) brightness(0.62);
+}
+
+/* ------------------------------------------------------------------ escolha */
+
+.escolha {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.75rem;
+  padding-left: 1rem;
+  border-left: 4px solid var(--destaque);
+}
+
+.escolha__texto {
+  max-width: 62ch;
+  margin: 0;
+  font-size: 0.9375rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.escolha__texto strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.botao-texto {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------- resultados */
+
+.resultados {
+  max-width: var(--largura);
+  margin: 0 auto;
+  padding: clamp(2rem, 4vw, 3rem) var(--margem) 4rem;
+}
+
+.resultados__barra {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--linha);
+  margin-bottom: 1.75rem;
+}
+
+.resultados__titulo {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  font-family: var(--display);
+  font-variation-settings: 'wdth' 108;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.resultados__recorte {
+  font-family: var(--corpo);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--tinta-fraca);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.campo__rotulo {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tinta-fraca);
+}
+
+.campo input {
+  width: min(300px, 60vw);
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--linha);
+  border-radius: 3px;
+  background: var(--superficie);
+  font-family: var(--corpo);
+  font-size: 0.9375rem;
+  color: var(--tinta);
+}
+
+.campo input:focus {
+  border-color: var(--destaque);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(20, 23, 26, 0.12);
+}
+
+/* ------------------------------------------------------------------- grade */
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card-item {
+  animation: surgir 0.45s var(--atraso, 0ms) both cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+@keyframes surgir {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.card {
+  display: block;
+  height: 100%;
+  border: 1px solid var(--linha);
+  border-radius: 4px;
+  background: var(--superficie);
+  color: inherit;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform 0.16s ease, border-color 0.16s ease, box-shadow 0.16s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: var(--ink);
+  box-shadow: 0 10px 24px -14px rgba(20, 23, 26, 0.45);
+}
+
+.faixa {
+  display: flex;
+  height: 9px;
+}
+
+.faixa__parte {
+  flex: 1;
+}
+
+.card__corpo {
+  padding: 1.15rem 1.15rem 1.25rem;
+}
+
+.card__bairro {
+  margin: 0 0 0.4rem;
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tinta-fraca);
+}
+
+.card__nome {
+  margin: 0 0 0.5rem;
+  font-family: var(--display);
+  font-variation-settings: 'wdth' 108;
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.card__endereco {
+  margin: 0 0 0.75rem;
+  font-size: 0.9375rem;
+  color: var(--tinta-fraca);
+}
+
+.card__horario {
+  margin: 0 0 1rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+
+.card__mais {
+  color: var(--tinta-fraca);
+}
+
+.card__materiais {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.85rem;
+  margin: 0;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--linha);
+  list-style: none;
+}
+
+.card__materiais li {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+  color: var(--tinta-fraca);
+}
+
+.ponto-cor {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+/* ------------------------------------------------------------------ avisos */
+
+.aviso {
+  max-width: var(--largura);
+  margin: 0 auto;
+  padding: 2.5rem var(--margem);
+  color: var(--tinta-fraca);
+}
+
+.aviso p {
+  margin: 0 0 0.75rem;
+}
+
+.aviso--erro {
+  border-left: 4px solid #d6301f;
+  padding-left: 1.25rem;
+}
+
+.aviso__detalhe {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+}
+
+.botao {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  border: 0;
+  border-radius: 3px;
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--corpo);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.botao:hover {
+  background: var(--ink-suave);
+}
+
+/* ----------------------------------------------------------------- detalhe */
+
+.detalhe {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: clamp(1.75rem, 4vw, 3rem) var(--margem) 4rem;
+}
+
+.voltar {
+  display: inline-block;
+  margin-bottom: 2rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--tinta-fraca);
+  text-decoration: none;
+  border-bottom: 1px solid var(--linha);
+  padding-bottom: 2px;
+}
+
+.voltar::before {
+  content: '← ';
+}
+
+.voltar:hover {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+.detalhe__topo {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--linha);
+}
+
+.detalhe__bairro {
+  margin: 0 0 0.6rem;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--tinta-fraca);
+}
+
+.detalhe__nome {
+  margin: 0 0 0.75rem;
+  font-family: var(--display);
+  font-variation-settings: 'wdth' 118;
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+}
+
+.detalhe__programa {
+  display: inline-block;
+  margin: 0;
+  padding: 0.3rem 0.7rem;
+  background: var(--ink);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.secao__titulo {
+  margin: 0 0 1rem;
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tinta-fraca);
+}
+
+.secao__titulo--espacado {
+  margin-top: 2.25rem;
+}
+
+.aceitos {
+  padding: 2.25rem 0;
+}
+
+.aceitos__lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 3px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.aceito {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.1rem 1rem 1.25rem;
+  background: var(--cor);
+  color: var(--tinta);
+}
+
+.aceito__nome {
+  font-family: var(--display);
+  font-variation-settings: 'wdth' 112;
+  font-weight: 800;
+  font-size: 1.1rem;
+  line-height: 1;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+.aceito__detalhe {
+  font-size: 0.8125rem;
+  opacity: 0.88;
+}
+
+.detalhe__colunas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(2rem, 5vw, 3.5rem);
+  padding-top: 1rem;
+  border-top: 1px solid var(--linha);
+  margin-top: 1rem;
+}
+
+.detalhe__endereco {
+  margin: 0 0 0.25rem;
+  font-size: 1.0625rem;
+}
+
+.dados {
+  margin: 1.5rem 0 0;
+}
+
+.dados div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px dotted var(--linha);
+}
+
+.dados dt {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tinta-fraca);
+}
+
+.dados dd {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+}
+
+.horarios {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.horarios li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px dotted var(--linha);
+}
+
+.horarios__dias {
+  font-size: 0.9375rem;
+}
+
+.horarios__faixa {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+
+.detalhe__observacao {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--tinta-fraca);
+}
+
+/* ------------------------------------------------------------------ rodapé */
+
+.rodape {
+  padding: 2.5rem var(--margem) 3rem;
+  border-top: 1px solid var(--linha);
+  background: var(--concreto);
+}
+
+.rodape p {
+  max-width: var(--largura);
+  margin: 0 auto 0.6rem;
+  font-size: 0.875rem;
+  color: var(--tinta-fraca);
+}
+
+.rodape__aviso {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+
+/* ------------------------------------------------------------- responsivo */
+
+@media (max-width: 900px) {
+  .lixeiras {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .lixeiras {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lixeira {
+    min-height: 130px;
+  }
+
+  .campo input {
+    width: 100%;
+  }
+
+  .campo {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
