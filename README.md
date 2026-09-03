@@ -10,8 +10,9 @@ generativa em [Prompt.md](Prompt.md).
 
 | O quê | Endereço |
 | --- | --- |
-| Site publicado (Azure Static Web Apps) | `PREENCHER APÓS O DEPLOY` |
-| Endpoint da Azure Function (GET) | `PREENCHER APÓS O DEPLOY` + `/api/pontos` |
+| Site publicado (Azure Static Web Apps) | https://orange-stone-0fc225510.3.azurestaticapps.net |
+| Endpoint da Azure Function (GET) | https://orange-stone-0fc225510.3.azurestaticapps.net/api/pontos |
+| Repositório | https://github.com/vinipadilha/eco-pontos |
 
 O mock **não** usa Apidog: os dados ficam no código da própria Azure Function
 (`api/src/dados.js`), sem serviço externo nem banco de dados.
