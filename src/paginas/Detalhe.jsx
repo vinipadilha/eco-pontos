@@ -4,7 +4,7 @@ import NaoEncontrado from './NaoEncontrado.jsx';
 
 export default function Detalhe({ pontos, estado }) {
   const { id } = useParams();
-  const ponto = pontos.find((item) => item.id === id);
+  const ponto = pontos.find((item) => item._id === id);
 
   if (estado === 'carregando') {
     return <p className="aviso">Carregando o ponto de coleta…</p>;
@@ -23,7 +23,7 @@ export default function Detalhe({ pontos, estado }) {
       <header className="detalhe__topo">
         <p className="detalhe__bairro">{ponto.bairro}</p>
         <h1 className="detalhe__nome">{ponto.nome}</h1>
-        <p className="detalhe__programa">{ponto.programa}</p>
+        {ponto.programa && <p className="detalhe__programa">{ponto.programa}</p>}
       </header>
 
       <section className="aceitos">
@@ -53,9 +53,9 @@ export default function Detalhe({ pontos, estado }) {
               <dd>{ponto.telefone}</dd>
             </div>
             <div>
-              <dt>Coordenadas</dt>
+              <dt>Id no MongoDB</dt>
               <dd>
-                {ponto.coordenadas.lat.toFixed(4)}, {ponto.coordenadas.lng.toFixed(4)}
+                {ponto._id}
               </dd>
             </div>
           </dl>
@@ -64,7 +64,7 @@ export default function Detalhe({ pontos, estado }) {
         <section>
           <h2 className="secao__titulo">Horários</h2>
           <ul className="horarios">
-            {ponto.horarios.map((horario) => (
+            {(ponto.horarios || []).map((horario) => (
               <li key={horario.dias}>
                 <span className="horarios__dias">{horario.dias}</span>
                 <span className="horarios__faixa">

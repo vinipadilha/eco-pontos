@@ -690,3 +690,162 @@ h2 {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ------------------------------------------------- CRUD: ações e formulário */
+
+.resultados__ferramentas {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.campo__grupo {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.botao--discreto {
+  background: transparent;
+  border: 1px solid var(--linha);
+  color: var(--tinta);
+  margin-top: 0;
+}
+
+.botao--discreto:hover {
+  background: var(--superficie);
+  border-color: var(--ink);
+}
+
+.botao:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card__link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  flex: 1;
+}
+
+.card__acoes {
+  display: flex;
+  border-top: 1px solid var(--linha);
+}
+
+.card__acoes button {
+  flex: 1;
+  padding: 0.6rem;
+  border: 0;
+  background: none;
+  color: var(--tinta-fraca);
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.card__acoes button + button {
+  border-left: 1px solid var(--linha);
+}
+
+.card__acoes button:hover {
+  background: var(--ink);
+  color: #fff;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  background: var(--superficie);
+}
+
+.formulario__titulo {
+  font-family: var(--display);
+  font-variation-settings: 'wdth' 108;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.formulario__linha {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.formulario .campo input,
+.formulario textarea {
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--linha);
+  border-radius: 3px;
+  background: var(--superficie);
+  font-family: var(--corpo);
+  font-size: 0.9375rem;
+  color: var(--tinta);
+}
+
+.formulario textarea {
+  resize: vertical;
+}
+
+.formulario__materiais {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.escolhas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.escolha-material {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid var(--linha);
+  border-radius: 3px;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.escolha-material--marcada {
+  background: var(--cor);
+  border-color: var(--cor);
+  color: var(--tinta);
+}
+
+.formulario__erro {
+  margin: 0;
+  padding-left: 0.75rem;
+  border-left: 3px solid #d6301f;
+  font-size: 0.875rem;
+  color: #a82418;
+}
+
+.formulario__acoes {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.botao-texto--escuro {
+  color: var(--tinta-fraca);
+}

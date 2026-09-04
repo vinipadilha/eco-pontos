@@ -1,1 +1,1 @@
-require('./functions/pontos');
+require('./functions/crud');
